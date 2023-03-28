@@ -36,3 +36,44 @@
     transform: rotate(360deg);
   }
 }
+.main-container {
+  text-align: center;
+}
+
+.number-cards-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 30px 0;
+}
+
+.card-container {
+  background-color: #f1f1f1;
+  width: 200px;
+  height: 250px;
+  margin: 10px;
+}
+
+.card-container:hover {
+  cursor: pointer;
+  box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+}
+
+.card-container span {
+  font-size: 2.25em;
+  font-weight: 700;
+  top: 40%;
+  position: relative;
+  transform: translateY(-50%);
+}
+
+.custom-btn {
+  padding: 10px;
+  background: #c4b0b0;
+  font-size: 16px;
+}
+
+.custom-btn:hover, .custom-btn:active, .custom-btn:focus {
+  cursor: pointer;
+  outline: 0;
+}
