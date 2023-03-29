@@ -9,25 +9,32 @@ class LuckyThree extends React.Component {
     constructor(props){
         super(props);
         this.state={
-            id:""
+            numberCards:["Click","Click","Click"]
         };
         this.displayRandomNumbers = this.displayRandomNumbers.bind(this);
     }
 
-    cardClickHandler=(msg)=>{
-        this.displayRandomNumbers(msg)
+    cardClickHandler=(msg,cardIndex)=>(e)=>{
+       //console.log(msg)
+        this.displayRandomNumbers(e,msg,cardIndex)
         //this.displayRandomNumbers();
     }
-    displayRandomNumbers=(msg)=>{
+    displayRandomNumbers=(e,msg,cardIndex)=>{
         //document.getElementById(msg).innerText=msg;
         let maxNumber = 9;
-    
+        
         interval_id = setInterval(() => {
-            document.getElementById(msg).innerText=Math.floor(Math.random() * (maxNumber + 1));
+            //document.getElementById(msg).innerText=Math.floor(Math.random() * (maxNumber + 1));
+            const state=this.state;
+        state.numberCards[cardIndex]=Math.floor(Math.random() * (maxNumber + 1)).toString();
+        this.setState=state;
+        document.getElementById(msg).innerText=state.numberCards[cardIndex]
+        console.log(state.numberCards[cardIndex],msg)
         },100);
+        
         document.getElementById(msg).style.fontSize="50px"
         document.getElementById(msg).style.fontWeight="700"
-        document.getElementById(msg).style.position="relative"
+         document.getElementById(msg).style.position="relative"
         document.getElementById(msg).style.textAlign="center"
     }
     // displayRandomNumbers = (event)=>{
@@ -56,14 +63,15 @@ class LuckyThree extends React.Component {
         }
         alert("Yay! You won!");
     }
-
+    
     render() {
-        return (
+        const id1=this.props.idArr
+        return ( 
             <div className="main-container">
                 <div className="number-cards-container">
-                    <NumberCard id={this.props.idArr[0]} color={this.props.colorsArr[0]} cardClickHandler={this.cardClickHandler}/>
-                    <NumberCard id={this.props.idArr[1]} color={this.props.colorsArr[1]} cardClickHandler={this.cardClickHandler}/>
-                    <NumberCard id={this.props.idArr[2]} color={this.props.colorsArr[2]} cardClickHandler={this.cardClickHandler}/>
+                    <NumberCard id={this.props.idArr[0]} color={this.props.colorsArr[0]} number={this.state.numberCards[0]} cardClickHandler={this.cardClickHandler(id1[0],0)}/>
+                    <NumberCard id={this.props.idArr[1]} color={this.props.colorsArr[1]} number={this.state.numberCards[1]}cardClickHandler={this.cardClickHandler(id1[1],1)}/>
+                    <NumberCard id={this.props.idArr[2]} color={this.props.colorsArr[2]} number={this.state.numberCards[2]} cardClickHandler={this.cardClickHandler(id1[2],2)}/>
                 </div>
                 <input id="tryYourLuckBtn" className="custom-btn" type="button" value="Try Your Luck" onClick={this.tryLuckClickHandler}/>
             </div>
